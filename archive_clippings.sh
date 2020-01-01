@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+TEMP="$HOME"/Documents/Kindle-clippings/_temp_clips.txt
+
+# Get file from Kindle
+CLIPS=/Volumes/Kindle/documents/My\ Clippings.txt
+
+# Remove title & save into temp file
+TITLE=$(grep --invert-match --max-count=1 "^\s*$" "$CLIPS")
+grep --invert-match "$TITLE" "$CLIPS" > "$TEMP"
+
+# Prepare title string as kebap-case-filename
+TITLE=$(echo "$TITLE" | \
+		perl -pe 's/[[:punct:]]//g' | \
+		perl -pe 's/\W+/-/g' | \
+		perl -pe 's/-+$//g')
+touch "$TITLE".txt
+
+# Remove original separators & timestamps
+# Convert descriptions into short ASCIDOC headings
+perl -pe 's/^=+//g' "$TEMP"_1 | \
+	perl -pe 's/ \|[ \wü]+,[ .\w]+(:\d+)+( \w+)?\s+//gi' | \
+	perl -pe 's/- (Your|Ihre) /\r\n=== /gi' >> \
+	"$TITLE".txt
+
+# Copy clippings to archive & clean up
+# cat "$TEMP"_2 >> "$TITLE".txt
+mv "$TEMP"* "$HOME"/.Trash
+
+# Remove clippings from device
+echo "" > "$CLIPS"
