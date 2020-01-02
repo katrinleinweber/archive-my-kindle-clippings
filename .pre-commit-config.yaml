@@ -3,4 +3,3 @@ repos:
     rev: master
     hooks:
     -   id: shellcheck
-    -   id: shfmt
