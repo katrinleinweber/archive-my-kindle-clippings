@@ -26,9 +26,6 @@ perl -pe 's/^=+//g' "$TEMP"_1 | \
 	"$TITLE".txt
 open "$TITLE"
 
-# Copy clippings to archive & clean up
-# cat "$TEMP"_2 >> "$TITLE".txt
-mv "$TEMP"* "$HOME"/.Trash
-
-# Remove clippings from device
+# Clean up locally & on device
+mv ./*_clips* "$HOME"/.Trash/
 echo "" > "$CLIPS"
