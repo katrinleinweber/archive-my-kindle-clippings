@@ -24,6 +24,7 @@ perl -pe 's/^=+//g' "$TEMP"_1 | \
 	perl -pe 's/ \|[ \wü]+,[ .\w]+(:\d+)+( \w+)?\s+//gi' | \
 	perl -pe 's/- (Your|Ihre) /\r\n=== /gi' >> \
 	"$TITLE".txt
+open "$TITLE"
 
 # Copy clippings to archive & clean up
 # cat "$TEMP"_2 >> "$TITLE".txt
