@@ -4,6 +4,8 @@ TEMP="$HOME"/Documents/Kindle-clippings/_temp_clips.txt
 
 # Get file from Kindle
 CLIPS=/Volumes/Kindle/documents/My\ Clippings.txt
+cp "$CLIPS" "./_ori_clips-$(date -u +"%y%m%d-%H%M").txt"
+# learned on https://stackoverflow.com/a/7216394/4341322
 
 # Remove title & save into temp file
 TITLE=$(grep --invert-match --max-count=1 "^\s*$" "$CLIPS")
