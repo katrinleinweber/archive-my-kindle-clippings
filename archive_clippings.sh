@@ -20,7 +20,7 @@ touch "$TITLE".txt
 
 # Remove original separators & timestamps
 # Convert descriptions into short ASCIDOC headings
-perl -pe 's/^=+//g' "$TEMP"_1 | \
+perl -pe 's/^=+//g' "$TEMP" | \
 	perl -pe 's/ \|[ \wü]+,[ .\w]+(:\d+)+( \w+)?\s+//gi' | \
 	perl -pe 's/- (Your|Ihre) /\r\n=== /gi' >> \
 	"$TITLE".txt
