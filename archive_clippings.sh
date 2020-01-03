@@ -16,14 +16,15 @@ TITLE=$(echo "$TITLE" | \
 		perl -pe 's/[[:punct:]]//g' | \
 		perl -pe 's/\W+/-/g' | \
 		perl -pe 's/-+$//g')
-touch "$TITLE".txt
+TITLE="$TITLE".txt
 
 # Remove original separators & timestamps
 # Convert descriptions into short ASCIDOC headings
 perl -pe 's/^=+//g' "$TEMP" | \
 	perl -pe 's/ \|[ \wü]+,[ .\w]+(:\d+)+( \w+)?\s+//gi' | \
 	perl -pe 's/- (Your|Ihre) /\r\n=== /gi' >> \
-	"$TITLE".txt
+	"$TITLE"
+
 open "$TITLE"
 
 # Clean up locally & on device
