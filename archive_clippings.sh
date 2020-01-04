@@ -7,25 +7,16 @@ CLIPS=/Volumes/Kindle/documents/My\ Clippings.txt
 cp "$CLIPS" "./_ori_clips-$(date -u +"%y%m%d-%H%M").txt"
 # learned on https://stackoverflow.com/a/7216394/4341322
 
-# Remove title & save into temp file
-TITLE=$(grep --invert-match --max-count=1 "^\s*$" "$CLIPS")
-grep --invert-match "$TITLE" "$CLIPS" > "$TEMP"
+source archive_clippings_functions.sh
 
-# Prepare title string as kebap-case-filename
-TITLE=$(echo "$TITLE" | \
-		perl -pe 's/[[:punct:]]//g' | \
-		perl -pe 's/\W+/-/g' | \
-		perl -pe 's/-+$//g')
-TITLE="$TITLE".txt
+# Remove title & save clips into temp file
+TITLE=$(extract_title "$CLIPS")
+extract_clips "$TITLE" "$CLIPS" > "$TEMP"
 
-# Remove original separators & timestamps
-# Convert descriptions into short ASCIDOC headings
-perl -pe 's/^=+//g' "$TEMP" | \
-	perl -pe 's/ \|[ \wü]+,[ .\w]+(:\d+)+( \w+)?\s+//gi' | \
-	perl -pe 's/- (Your|Ihre) /\r\n=== /gi' >> \
-	"$TITLE"
-
-open "$TITLE"
+TITLE_F=$(format_title "$TITLE")
+touch "$TITLE_F"
+format_clips "$TEMP" >> "$TITLE_F"
+open "$TITLE_F"
 
 # Clean up locally & on device
 mv ./*_clips* "$HOME"/.Trash/
