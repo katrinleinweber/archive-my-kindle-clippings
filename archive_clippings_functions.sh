@@ -7,10 +7,8 @@ extract_title() {
 format_title() {
     # Prepare title string as kebap-case-filename
     echo "$1" | \
-        perl -pe 's/[[:punct:]]//g' | \
         perl -pe 's/\W+/-/g' | \
-        perl -pe 's/-+$//' | \
-        perl -pe 's/\b$/.txt/'
+        perl -pe 's/\b(-+)?$/.txt/'
 }
 
 extract_clips() {

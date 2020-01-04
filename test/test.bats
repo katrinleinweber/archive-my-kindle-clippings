@@ -9,11 +9,11 @@ TITLE=$(extract_title "$CLIPS")
 TITLE_F=$(format_title "$TITLE")
 
 @test "Extract title correctly" { 
-	[ "$TITLE" = "21 Lessons for the 21st Century (Yuval Noah Harari, Book 2)" ]
+	[ "$TITLE" = "21 Lessons, for the 21st Century (Noah-Harari; Yuval: Book 2)" ]
 }
 
 @test "Format filename from title correctly" { 	
-	[ "$TITLE_F" = "21-Lessons-for-the-21st-Century-Yuval-Noah-Harari-Book-2.txt" ]
+	[ "$TITLE_F" = "21-Lessons-for-the-21st-Century-Noah-Harari-Yuval-Book-2.txt" ]
 }
 
 @test "Extract clippings correctly" { 	
