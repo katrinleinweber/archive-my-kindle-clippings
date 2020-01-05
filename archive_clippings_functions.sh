@@ -8,6 +8,7 @@ format_title() {
     # Prepare title string as kebap-case-filename
     echo "$1" | \
         perl -pe 's/\W+/-/g' | \
+        perl -pe 's/^-+//g' | \
         perl -pe 's/\b(-+)?$/.txt/'
 }
 
