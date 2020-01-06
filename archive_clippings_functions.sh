@@ -22,5 +22,6 @@ format_clips() {
     # Convert descriptions into short ASCIDOC headings
     perl -pe 's/^=+//g' "$1" | \
         perl -pe 's/ \|[^[:punct:]]+,[ .\w]+(:\d+)+( \w+)?\s+//gi' | \
-        perl -pe 's/- [A-Z][a-z]+ /\r\n=== /g'
+        perl -pe 's/- [A-Z][a-z]+ /\r\n== /g' | \
+        perl -pe 's/^== N/==== N/g'
 }
