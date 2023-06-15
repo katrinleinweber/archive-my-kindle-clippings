@@ -1,0 +1,23 @@
+skip_output:
+  - meta
+  - execution
+  - success
+  - summary
+  
+pre-commit:
+  parallel: true
+  commands:
+
+    shellcheck:
+      glob: '*.sh'
+      run: shellcheck --shell=bash {staged_files}
+      skip:
+        - merge
+        - rebase
+    
+    shfmt:
+      glob: '*.sh'
+      run: shfmt --indent=2 --case-indent --write {staged_files} && git add {staged_files}
+      skip:
+        - merge
+        - rebase
