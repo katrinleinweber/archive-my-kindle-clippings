@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euf -o pipefail
+
 TEMP="$HOME"/Documents/Kindle-clippings/_temp_clips.txt
 
 # Get file from Kindle
@@ -40,10 +42,10 @@ extract_clips "$TITLE" "$CLIPS" > "$TEMP"
 TITLE_F=$(format_title "$TITLE")
 touch "$TITLE_F"
 format_clips "$TEMP" >> "$TITLE_F"
-open "$TITLE_F"
+$EDITOR "$TITLE_F"
 
 # Clean up locally & on device
-mv ./*_clips* "$HOME"/.Trash/
+trash "$TEMP"
 echo "" > "$CLIPS"
 
 # Copy clippings onto device for review
